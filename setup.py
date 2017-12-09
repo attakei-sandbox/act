@@ -31,7 +31,9 @@ setup(
     ],
     keywords='',
     packages=find_packages(),
-    install_requires=[],
+    install_requires=[
+        'click',
+    ],
     extras_require={
         'dev': [],
         'test': [
