@@ -2,7 +2,8 @@
 
 ACT_DIR=${HOME}/.act
 ACT_VENV=${ACT_DIR}/.venv
-ACT_PIP=${ACT_DIR}/.venv/pip
+ACT_PIP=${ACT_DIR}/.venv/bin/pip
+ACT_PATH=${ACT_DIR}/.venv/bin/act
 
 # --------------------------------------
 # Check pre-requirements
@@ -43,4 +44,5 @@ git clone https://github.com/attakei/act.git $ACT_DIR > /dev/null 2>&1
 python3 -m venv $ACT_DIR/.venv > /dev/null 2>&1
 $(cd $ACT_DIR && $ACT_PIP install -e .)
 
-echo "Finish to install!"
+echo "Finish installation"
+echo "Set alias your shell: alias act='ACT_PATH'"
