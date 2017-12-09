@@ -15,6 +15,8 @@ def act():
 @act.command()
 @click.argument('ignore_types', nargs=-1)
 def gitignore(ignore_types: tuple):
+    """Get .gitignore output from gitignore.io
+    """
     URL_BASE = 'https://www.gitignore.io/api'
     ignore_types = sorted(ignore_types)
     Logger.debug('Targets are %s', ignore_types)
