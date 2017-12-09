@@ -2,8 +2,8 @@
 
 ACT_DIR=${HOME}/.act
 ACT_VENV=${ACT_DIR}/.venv
-ACT_PIP=${ACT_DIR}/.venv/bin/pip
-ACT_PATH=${ACT_DIR}/.venv/bin/act
+ACT_PIP=${ACT_VENV}/bin/pip
+ACT_PATH=${ACT_VENV}/bin/act
 
 # --------------------------------------
 # Check pre-requirements
@@ -45,4 +45,4 @@ python3 -m venv $ACT_DIR/.venv > /dev/null 2>&1
 $(cd $ACT_DIR && $ACT_PIP install -e .)
 
 echo "Finish installation"
-echo "Set alias your shell: alias act='ACT_PATH'"
+echo "Set alias your shell: alias act='${ACT_PATH}'"
