@@ -40,5 +40,8 @@ setup(
     },
     data_files=[],
     entry_points={
+        'console_scripts': [
+            'act=act.cli:main',
+        ],
     },
 )
