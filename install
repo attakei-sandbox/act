@@ -37,5 +37,6 @@ fi
 # Install act
 # --------------------------------------
 echo "Start installation act"
-git clone https://github.com/attakei/act.git $ACT_DIR
-python3 -m venv $ACT_DIR/.venv
+git clone https://github.com/attakei/act.git $ACT_DIR > /dev/null 2>&1
+python3 -m venv $ACT_DIR/.venv > /dev/null 2>&1
+
