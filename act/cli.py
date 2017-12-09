@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
+from pathlib import Path
 from urllib.request import urlopen
 import logging
+import subprocess
 import click
 
 
@@ -24,6 +26,22 @@ def gitignore(ignore_types: tuple):
     Logger.debug('Call URL is %s', url)
     resp = urlopen(url)
     click.echo(resp.read())
+
+
+@act.command()
+def upgrade():
+    """Upgrade act
+    """
+    repo = Path(__file__).parent.parent
+    # TODO: Not use subprocess (use Python lib)
+    commands = [
+        'git pull',
+        'pip install -e .',
+    ]
+    for command in commands:
+        proc = subprocess.Popen(
+            command.split(), cwd=repo)
+        proc.communicate()
 
 
 def main():
