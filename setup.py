@@ -34,7 +34,9 @@ setup(
     install_requires=[],
     extras_require={
         'dev': [],
-        'test': [],
+        'test': [
+            'flake8',
+        ],
     },
     package_data={
     },
