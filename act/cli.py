@@ -51,15 +51,18 @@ def gitignore(ignore_types: tuple):
 def upgrade():
     """Upgrade act
     """
-    repo = Path(__file__).parent.parent
+    repo_dir = Path(__file__).parent.parent
+    # Run git pull
+    from git import Repo
+    repo = Repo(repo_dir)
+    repo.git.pull()
     # TODO: Not use subprocess (use Python lib)
     commands = [
-        'git pull',
         'pip install -e .',
     ]
     for command in commands:
         proc = subprocess.Popen(
-            command.split(), cwd=repo)
+            command.split(), cwd=repo_dir)
         proc.communicate()
 
 
