@@ -14,7 +14,7 @@ def act():
     pass
 
 
-@act.command()
+@act.command('git-init')
 @click.option('--path', '-p', type=click.Path(exists=True), default='.')
 @click.option('--message', '-m', type=str, default='Initial commit')
 def git_init(path, message):
