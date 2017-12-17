@@ -13,7 +13,9 @@ Logger = logging.getLogger(__name__)
 @act.command('git-init')
 @click.option('--path', '-p', type=click.Path(exists=True), default='.')
 @click.option('--message', '-m', type=str, default='Initial commit')
-def git_init(path, message):
+def git_init(path: str, message: str):
+    """Initialize as git repository
+    """
     from git import Repo
     from git.exc import InvalidGitRepositoryError
     try:
