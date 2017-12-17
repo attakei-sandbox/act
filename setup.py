@@ -33,6 +33,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'click',
+        'GitPython',
     ],
     extras_require={
         'dev': [],
