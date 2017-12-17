@@ -15,6 +15,25 @@ def act():
 
 
 @act.command()
+@click.option('--path', '-p', type=click.Path(exists=True), default='.')
+@click.option('--message', '-m', type=str, default='Initial commit')
+def git_init(path, message):
+    from git import Repo
+    from git.exc import InvalidGitRepositoryError
+    try:
+        Repo(path)
+        click.echo('This folder is already git repository')
+        return
+    except InvalidGitRepositoryError:
+        pass
+    repo = Repo.init(path)
+    repo.git.add('.')
+    repo.index.commit(message)
+    click.echo(f"Initialize git repository into {path}")
+    return
+
+
+@act.command()
 @click.argument('ignore_types', nargs=-1)
 def gitignore(ignore_types: tuple):
     """Get .gitignore output from gitignore.io
