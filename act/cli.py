@@ -54,7 +54,7 @@ def upgrade():
     repo_dir = Path(__file__).parent.parent
     # Run git pull
     from git import Repo
-    repo = Repo(repo_dir)
+    repo = Repo(str(repo_dir))
     repo.git.pull()
     # TODO: Not use subprocess (use Python lib)
     commands = [
