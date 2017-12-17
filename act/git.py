@@ -4,6 +4,8 @@
 from urllib.request import urlopen
 import logging
 import click
+from git import Repo
+from git.exc import InvalidGitRepositoryError
 from .cli import act
 
 
@@ -16,8 +18,6 @@ Logger = logging.getLogger(__name__)
 def git_init(path: str, message: str):
     """Initialize as git repository
     """
-    from git import Repo
-    from git.exc import InvalidGitRepositoryError
     try:
         Repo(path)
         click.echo('This folder is already git repository')
