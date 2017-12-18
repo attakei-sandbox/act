@@ -7,6 +7,8 @@ import click
 
 Logger = logging.getLogger(__name__)
 
+ROOT = Path(__file__).resolve().parents[1]
+
 
 @click.group()
 def act():
@@ -37,4 +39,5 @@ def main():
     """
     # Import subcommands
     from . import git  # noqa: falke8
+    from . import gitlab  # noqa:flake8
     act()

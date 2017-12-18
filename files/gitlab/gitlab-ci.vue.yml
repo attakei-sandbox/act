@@ -1,0 +1,15 @@
+stages:
+  - test
+
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  untracked: true
+  paths:
+    - node_modules/
+
+
+unit_tests:
+  image: node:8.9.3
+  script:
+    - npm install
+    - npm run unit
