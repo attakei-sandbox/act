@@ -18,6 +18,9 @@ def init_yml(template: str):
         return
     # TODO: generate by module
     src = ROOT / 'files' / 'gitlab' / f"gitlab-ci.{template}.yml"
+    if not src.exists():
+        click.echo(f"Template:'{template}' is not found.")
+        return
     content = src.read_text()
     cur_yml.write_text(content)
     click.echo('Generated!')
