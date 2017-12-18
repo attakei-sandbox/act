@@ -1,0 +1,11 @@
+sudo: false
+language: python
+matrix:
+  include:
+    - python: '3.6'
+
+# Run CI
+install:
+  - pip install .[test]
+script:
+  - flake8
