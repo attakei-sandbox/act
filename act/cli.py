@@ -71,5 +71,5 @@ def upgrade():
 def main():
     """Script endpoint
     """
-    from . import gitlab
+    from . import gitlab  # noqa:flake8
     act()
