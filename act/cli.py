@@ -69,4 +69,5 @@ def upgrade():
 def main():
     """Script endpoint
     """
+    from . import gitlab
     act()
