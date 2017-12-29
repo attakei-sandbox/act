@@ -17,7 +17,8 @@ JINJA2_ENV = Environment(
 
 @act.command('pelican-new')
 @click.option('--style', '-s', type=str, default='simple')
-def init_article(style: str):
+@click.option('--title', '-t', type=str, required=True)
+def init_article(style: str, title: str):
     article_date = date.today()
     output_dir: Path = Path.cwd()\
         .joinpath(BASIC_PATH, str(article_date.year))
@@ -25,7 +26,17 @@ def init_article(style: str):
     template: Template = JINJA2_ENV.get_template(f"{style}.j2")
     article_path: Path = output_dir.joinpath('article.rst')
     template.stream(
-        article_date=article_date.strftime('%Y-%m-%d'))\
+        article_date=article_date.strftime('%Y-%m-%d'),
+        title=title)\
         .dump(str(article_path))
     click.echo(f"Generated: {article_path}")
     return
+
+
+def rst_section(input: str):
+    """Pretty simple reST section string
+    """
+    return '=' * len(input) * 2
+
+
+JINJA2_ENV.filters['rst_section'] = rst_section
