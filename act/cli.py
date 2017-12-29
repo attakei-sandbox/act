@@ -7,7 +7,7 @@ import click
 
 Logger = logging.getLogger(__name__)
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT: Path = Path(__file__).resolve().parents[1]
 
 
 @click.group()
@@ -40,4 +40,5 @@ def main():
     # Import subcommands
     from . import git  # noqa: falke8
     from . import gitlab  # noqa:flake8
+    from . import pelican  # noqa:flake8
     act()
