@@ -4,6 +4,7 @@ from datetime import date
 import logging
 import click
 from jinja2 import Environment, FileSystemLoader, Template
+from git import Repo
 from .cli import act, ROOT
 
 
@@ -31,6 +32,10 @@ def init_article(style: str, title: str, category: str):
         title=title, category=category)\
         .dump(str(article_path))
     click.echo(f"Generated: {article_path}")
+    repo: Repo = Repo(str(Path.cwd()))
+    new_branch = repo.create_head(
+        f"articles/{article_date.strftime('%Y%m%d')}", 'master')
+    new_branch.checkout()
     return
 
 
