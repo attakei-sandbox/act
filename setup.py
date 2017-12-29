@@ -34,6 +34,7 @@ setup(
     install_requires=[
         'click',
         'GitPython',
+        'Jinja2',
     ],
     extras_require={
         'dev': [],
