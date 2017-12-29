@@ -40,4 +40,5 @@ def main():
     # Import subcommands
     from . import git  # noqa: falke8
     from . import gitlab  # noqa:flake8
+    from . import pelican  # noqa:flake8
     act()
