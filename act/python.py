@@ -31,7 +31,7 @@ def short(dest):
     dest: Path = Path(dest).absolute()
     Logger.debug('Target path is %s', dest)
     now = datetime.now()
-    template: Template = JINJA2_ENV.get_template('short.py.j2')
+    template: Template = JINJA2_ENV.get_template('script.py.j2')
     template.stream(dest=dest, now=now).dump(str(dest))
     click.echo(f"Create source at {dest}")
     return
