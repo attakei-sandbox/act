@@ -38,7 +38,9 @@ def main():
     """Script endpoint
     """
     # Import subcommands
-    from . import git  # noqa: falke8
-    from . import gitlab  # noqa:flake8
-    from . import pelican  # noqa:flake8
+    from . import (  # noqa: falke8
+        git,
+        gitlab,
+        pelican,
+    )
     act()
