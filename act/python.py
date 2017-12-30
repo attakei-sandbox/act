@@ -29,6 +29,9 @@ def short(dest):
     """Generate source as short script
     """
     dest: Path = Path(dest).absolute()
+    if dest.suffix != 'py':
+        Logger.debug('File extension is added automate')
+        dest = dest.with_suffix('.py')
     Logger.debug('Target path is %s', dest)
     now = datetime.now()
     template: Template = JINJA2_ENV.get_template('script.py.j2')
