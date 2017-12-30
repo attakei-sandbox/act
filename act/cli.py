@@ -42,5 +42,6 @@ def main():
         git,
         gitlab,
         pelican,
+        python,
     )
     act()
