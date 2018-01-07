@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import logging
 from datetime import datetime
+from pathlib import Path
 import click
 from jinja2 import Environment, PackageLoader, Template
 from ..cli import act
@@ -25,9 +26,17 @@ def django():
 
 @django.command()
 @click.argument('name')
-def create_command(name: str):
+@click.option(
+    '--dest', '-d', default='.',
+    type=click.Path(file_okay=False, exists=True))
+def create_command(name: str, dest: str):
     """Create sources of custom command
     """
-    click.echo('Hello')
+    # Generate dependency files and directories
+    dest = Path(dest)
+    (dest / 'management').mkdir(parents=True, exist_ok=True)
+    (dest / 'management/__init__.py').touch(exist_ok=True)
+    (dest / 'management/commands').mkdir(parents=True, exist_ok=True)
+    (dest / 'management/commands/__init__.py').touch(exist_ok=True)
     template: Template = JINJA2_ENV.get_template('command.py.j2')
-    template.stream().dump(f"{name}.py")
+    template.stream().dump(str(dest / f"management/commands/{name}.py"))
