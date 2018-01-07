@@ -1,0 +1,16 @@
+; Generated at {{ proc_date }}
+[flake8]
+ignore = D203
+exclude = 
+    .git,__pycache__,.venv,
+    */migrations/*,
+    */settings.py,*/testing.py,manage.py,
+    docs/conf.py
+max-complexity = 10
+
+
+[tool:pytest]
+addopts = --disable-pytest-warnings
+python_files = tests.py test_*.py *_tests.py
+
+DJANGO_SETTINGS_MODULE = {{module_name}}.tests.settings

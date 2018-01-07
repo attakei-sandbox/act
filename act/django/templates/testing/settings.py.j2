@@ -1,0 +1,17 @@
+# -*- coding:utf-8 -*-
+"""{{ module_name }} settings for py.test
+
+:Generate at: {{ proc_date }}
+"""
+from ..settings import *
+
+
+ALLOWED_HOSTS += ['localhost', ]
+
+# Database: use SQLite3 on memory 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
+}
