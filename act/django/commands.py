@@ -29,7 +29,8 @@ def django():
 @click.option(
     '--dest', '-d', default='.',
     type=click.Path(file_okay=False, exists=True))
-def create_command(name: str, dest: str):
+@click.option('--comment', '-c', default=None, type=str)
+def create_command(name: str, dest: str, comment: str):
     """Create sources of custom command
     """
     # Generate dependency files and directories
@@ -38,5 +39,9 @@ def create_command(name: str, dest: str):
     (dest / 'management/__init__.py').touch(exist_ok=True)
     (dest / 'management/commands').mkdir(parents=True, exist_ok=True)
     (dest / 'management/commands/__init__.py').touch(exist_ok=True)
+    # Generate main source
+    context = {
+        'comment': comment,
+    }
     template: Template = JINJA2_ENV.get_template('command.py.j2')
-    template.stream().dump(str(dest / f"management/commands/{name}.py"))
+    template.stream(**context).dump(str(dest / f"management/commands/{name}.py"))
