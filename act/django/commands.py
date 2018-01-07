@@ -44,4 +44,5 @@ def create_command(name: str, dest: str, comment: str):
         'comment': comment,
     }
     template: Template = JINJA2_ENV.get_template('command.py.j2')
-    template.stream(**context).dump(str(dest / f"management/commands/{name}.py"))
+    template.stream(**context)\
+        .dump(str(dest / f"management/commands/{name}.py"))
