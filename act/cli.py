@@ -43,5 +43,6 @@ def main():
         gitlab,
         pelican,
         python,
+        django,
     )
     act()
