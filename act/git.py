@@ -2,6 +2,7 @@
 """act git commands
 """
 from urllib.request import urlopen
+from pathlib import Path
 import logging
 import click
 from git import Repo
@@ -32,8 +33,11 @@ def git_init(path: str, message: str):
 
 
 @act.command()
+@click.option(
+    '--output', '-o', default='./.gitignore',
+    type=click.Path(dir_okay=False), help='Output file')
 @click.argument('ignore_types', nargs=-1)
-def gitignore(ignore_types: tuple):
+def gitignore(output: str, ignore_types: tuple):
     """Get .gitignore output from gitignore.io
     """
     URL_BASE = 'https://www.gitignore.io/api'
@@ -42,4 +46,5 @@ def gitignore(ignore_types: tuple):
     url = '{}/{}'.format(URL_BASE, ','.join(ignore_types))
     Logger.debug('Call URL is %s', url)
     resp = urlopen(url)
-    click.echo(resp.read())
+    with Path(output).open('wb') as fp:
+        fp.write(resp.read())
