@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 import logging
 import click
-from jinja2 import Environment, FileSystemLoader, Template
+from jinja2 import Environment, FileSystemLoader
 from .cli import act, ROOT
 """Python source generating
 """
@@ -28,13 +28,13 @@ def python():
 def short(dest):
     """Generate source as short script
     """
-    dest: Path = Path(dest).absolute()
+    dest = Path(dest).absolute()  # type: Path
     if dest.suffix != 'py':
         Logger.debug('File extension is added automate')
         dest = dest.with_suffix('.py')
     Logger.debug('Target path is %s', dest)
     now = datetime.now()
-    template: Template = JINJA2_ENV.get_template('script.py.j2')
+    template = JINJA2_ENV.get_template('script.py.j2')  # type: jinja2.Template
     template.stream(dest=dest, now=now).dump(str(dest))
     click.echo(f"Create source at {dest}")
     return
