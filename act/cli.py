@@ -30,7 +30,7 @@ def upgrade():
     ]
     for command in commands:
         proc = subprocess.Popen(
-            command.split(), cwd=repo_dir)
+            command.split(), cwd=str(repo_dir))
         proc.communicate()
 
 
