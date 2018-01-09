@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import date
 import logging
 import click
-from jinja2 import Environment, FileSystemLoader, Template
+from jinja2 import Environment, FileSystemLoader
 from git import Repo
 from .cli import act, ROOT
 
@@ -22,17 +22,17 @@ JINJA2_ENV = Environment(
 @click.option('--category', '-c', type=str, default='Life')
 def init_article(style: str, title: str, category: str):
     article_date = date.today()
-    output_dir: Path = Path.cwd()\
-        .joinpath(BASIC_PATH, str(article_date.year))
+    output_dir = Path.cwd()\
+        .joinpath(BASIC_PATH, str(article_date.year))  # type: Path
     output_dir.mkdir(parents=True, exist_ok=True)
-    template: Template = JINJA2_ENV.get_template(f"{style}.j2")
-    article_path: Path = output_dir.joinpath('article.rst')
+    template = JINJA2_ENV.get_template(f"{style}.j2")  # type: jinja2.Template
+    article_path = output_dir.joinpath('article.rst')  # type: Path
     template.stream(
         article_date=article_date.strftime('%Y-%m-%d'),
         title=title, category=category)\
         .dump(str(article_path))
     click.echo(f"Generated: {article_path}")
-    repo: Repo = Repo(str(Path.cwd()))
+    repo = Repo(str(Path.cwd()))  # type: Repo
     new_branch = repo.create_head(
         f"articles/{article_date.strftime('%Y%m%d')}", 'master')
     new_branch.checkout()

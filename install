@@ -6,17 +6,21 @@ ACT_PIP=${ACT_VENV}/bin/pip
 ACT_PATH=${ACT_VENV}/bin/act
 
 # --------------------------------------
+# Detect python
+# --------------------------------------
+if [ "$python_bin" = "" ]; then
+	echo "Use default python exec (python3)"
+	python_bin=python3
+fi
+if [ "$(which $python_bin)" = "" ]; then
+	echo "$python_bin is not found. Please install before run it"
+	exit 1
+fi
+python_bin=$(which $python_bin)
+
+# --------------------------------------
 # Check pre-requirements
 # --------------------------------------
-if [ $(which brew) = "" ]; then
-  echo "Homebrew is not installed"
-  exit 1
-fi
-_installed_python=`brew list python3 > /dev/null`
-if [[ $_installed_python -ne 0 ]]; then
-  echo "Python3 is not installed"
-  brew install python3
-fi
 if [ $(which git) = "" ]; then
   echo "Git is not installed"
   brew install git
@@ -41,8 +45,9 @@ fi
 # --------------------------------------
 echo "Start installation act"
 git clone https://github.com/attakei/act.git $ACT_DIR > /dev/null 2>&1
-python3 -m venv $ACT_DIR/.venv > /dev/null 2>&1
-$(cd $ACT_DIR && $ACT_PIP install -e .)
+$python_bin -m venv $ACT_DIR/.venv > /dev/null 2>&1
+cd $ACT_DIR 
+$ACT_PIP install -e .
 
 echo "Finish installation"
 echo "Set alias your shell: alias act='${ACT_PATH}'"
