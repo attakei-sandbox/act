@@ -1,0 +1,30 @@
+#!/bin/sh
+
+ACT_DIR=${HOME}/.act
+ACT_VENV=${ACT_DIR}/.venv
+ACT_PIP=${ACT_VENV}/bin/pip
+ACT_PATH=${ACT_VENV}/bin/act
+
+# --------------------------------------
+# Detect python
+# --------------------------------------
+if [ "$python_bin" = "" ]; then
+	echo "Use default python exec (python3)"
+	python_bin=python3
+fi
+if [ "$(which $python_bin)" = "" ]; then
+	echo "$python_bin is not found. Please install before run it"
+	exit 1
+fi
+python_bin=$(which $python_bin)
+
+# --------------------------------------
+# Install act
+# --------------------------------------
+rm -rf $ACT_VENV
+$python_bin -m venv $ACT_DIR/.venv > /dev/null 2>&1
+cd $ACT_DIR 
+$ACT_PIP install -e .
+
+echo "Finish installation"
+echo "Set alias your shell: alias act='${ACT_PATH}'"
